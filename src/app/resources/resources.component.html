@@ -1,0 +1,85 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <span>
+
+                            <mat-form-field>
+                                <input #seachInput type="text" matInput (keyup)="applyFilter($event.target.value)" value=""  placeholder="keyword...">
+                                <button mat-raised-button (click)="applyFilter(seachInput.value)" class="btn btn-white btn-round btn-just-icon">
+                                    <i class="material-icons">search</i>
+                                </button>
+                            </mat-form-field>
+
+                            <button class="btn btn-primary">
+                                Add Resource
+                            </button>
+
+                            <span class="dropdown" id="addDropDown">
+                                <a href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="material-icons">add_box</i>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="addDropDown">
+                                    <a class="dropdown-item" href="javascript:void(0)">Add Column</a>
+                                    <a class="dropdown-item" href="javascript:void(0)">Import csv</a>
+                                </div>
+                            </span>
+
+                        </span>
+                    </div>
+                    
+                </div>
+
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Resource Catalog</h4>
+                        <p class="card-category"> Available Resources</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table"   >
+                                <thead class=" text-primary">
+                                    <th>
+                                        Select
+                                    </th>
+                                    <th>
+                                        Resource Name
+                                    </th>
+                                    <th>
+                                        Resource Code
+                                    </th>
+                                  </thead>
+                                <tbody>
+                                    <tr *ngFor="let res of resources">
+                                        <td>
+                                            <input class="form-check-input" type="checkbox" value="">
+                                            {{res.id}}
+      <span class="form-check-sign">
+          <span class="check"></span>
+      </span>
+                                        </td>  
+                                        <td>
+                                            {{res.name}}
+                                        </td>
+                                        <td>
+                                            {{res.code}}
+                                        </td>
+                                       
+                                    </tr>
+                                 
+  
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  
+        </div>
+    </div>
+  </div>

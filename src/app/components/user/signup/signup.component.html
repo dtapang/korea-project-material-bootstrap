@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>login page</title>
+    <link rel="stylesheet" href="signup.component.css">
+</head>
+
+<body>
+<!-- <div class='header'>Resource Maganement</div> -->
+<div class="row form">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h5 class="card-title text-center">Signup</h5>
+          <form class="form-signin" #usersignup = "ngForm" (ngSubmit) = "onClickSubmit(user)" novalidate>
+            <div class="form-group">
+              <label for="inputUserame">Username</label>
+              <br>
+              <input type="text" id="inputUserame" class="form-control" placeholder="Username"
+              [(ngModel)]="user.username" [ngModelOptions]="{standalone: true}">
+            </div>
+
+            <div class="form-group">
+              <label for="inputFirstname">Firstname</label>
+              <br>
+              <input type="text" id="inputFirstname" class="form-control" placeholder="Firstname" 
+              [(ngModel)]="user.firstname" [ngModelOptions]="{standalone: true}">
+            </div>
+
+            <div class="form-group">
+              <label for="inputLastname">Lastname</label>
+              <br>
+              <input type="lastname" id="inputLastname" class="form-control" placeholder="Lastname" 
+              [(ngModel)]="user.lastname" [ngModelOptions]="{standalone: true}">
+            </div>
+
+            <div class="form-group">
+              <label for="inputEmail">Email address</label>
+              <br>
+              <input type="email" id="inputEmail" class="form-control" placeholder="Email address" 
+              [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}">
+            </div>
+            
+            <hr>
+            <div class="form-group">
+              <label for="inputPassword">Password</label>
+              <br>
+              <input type="password" id="inputPassword" class="form-control" placeholder="Password" 
+              [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}">
+            </div>
+            
+            <div class="form-group">
+              <label for="inputConfirmPassword">Confirm password</label>
+              <br>
+              <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Password" 
+              [(ngModel)]="confirmPassword" [ngModelOptions]="{standalone: true}">
+            </div>
+
+            <!-- <div class="form-group">
+              <label for="inputRole">Role</label>
+              <br>
+              <input type="role" id="inputRole" class="form-control" placeholder="role" ngModel>
+            </div> -->
+
+            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign up</button>
+            <a class="d-block text-center mt-2 small">Sign In</a>
+            <hr class="my-4">
+          
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
