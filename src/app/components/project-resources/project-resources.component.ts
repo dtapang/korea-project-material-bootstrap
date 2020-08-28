@@ -3,6 +3,7 @@ import { ResourceService } from 'app/resources/resource.service';
 import { Resource } from 'app/models/Resource';
 import { Project } from 'app/models/Project';
 import { ProjectService } from './project.service';
+import { ProjectResourcesService } from './project-resources.service';
 
 @Component({
   selector: 'app-project-resources',
@@ -16,10 +17,13 @@ export class ProjectResourcesComponent implements OnInit {
   projectResourcesMap: Map<number, Resource> = new Map<number, Resource>();
   selectedResourceMap : Map<number, Resource> = new Map<number, Resource>();
   prCheckSet = new Set();
+
+  p1: number = 1;
+  p2: number = 1;
   
-  constructor(private resourceService : ResourceService,
-              private projectService : ProjectService) { 
-  }
+  constructor(private resourceService : ResourceService, 
+    private projectService : ProjectService,
+    private prService: ProjectResourcesService) {}
 
   ngOnInit() {
     this.projectService.getall().subscribe((arr: Project[]) => {
@@ -29,7 +33,7 @@ export class ProjectResourcesComponent implements OnInit {
         this.projects = [];
       }
       
-      console.log(`projects ${this.projects}`);
+      console.log(this.projects);
     });
 
     this.resourceService.getall().subscribe((arr: Resource[]) => {
@@ -42,6 +46,10 @@ export class ProjectResourcesComponent implements OnInit {
       console.log(`resources ${this.resources}`);
     });
      
+  }
+
+  submitProjectResources(resource: Resource, projectId: number){
+    this.prService.createNew(resource, projectId).subscribe();
   }
 
   loadProject(id: number){

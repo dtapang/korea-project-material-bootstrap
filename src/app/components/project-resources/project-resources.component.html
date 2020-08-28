@@ -2,36 +2,34 @@
 <div class="main-content">
 
     <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Select Project
+        <button href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="true" >
+            
+            <b class="caret">Select Project</b>
         </button>
-        <div *ngFor="let project of projects;" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" (click)="loadProject(project.id)">{{project.name}}</a>
-        </div>
-      </div>
+        <ul class="dropdown-menu" *ngFor="let project of projects">
+            <li><a href="#">{{project.name}}</a></li>
+        </ul>
+    </div>   
 
     <div class="container-fluid">
 
       <div class="row">
         <div class="col-lg-6 col-md-12">
             <div class="card">
-                <div class="card-header card-header-tabs card-header-primary">
-                    <div class="nav-tabs-navigation">
-                        <div class="nav-tabs-wrapper">
-                            <span class="nav-tabs-title">Resources</span>
-                            <ul class="nav nav-tabs" data-tabs="tabs">
-                                <li class="nav-item">
-                                    <a mat-button class="nav-link active" (click)="addSelectedResourcesToProject()" data-toggle="tab">
-                                        <i class="material-icons">forward</i> Add to Project
-                                        <div class="ripple-container"></div>
-                                    </a>
-                                </li>
 
 
-                            </ul>
-                        </div>
-                    </div>
+                <div class="card-header card-header-primary">
+                    <span><h4 class="card-title">Resources
+
+                        <button class="btn btn-warning btn-round" (click)="addSelectedResourcesToProject()">
+                            Add to Project<i class="material-icons">forward</i> 
+                        </button>
+                    </h4> 
+
+                </span>
+                    <p class="card-category">Select Resources For Project</p>
                 </div>
+
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane active" id="resourceCatalog">
@@ -41,12 +39,12 @@
                                     <th>Select</th>
                                     <th>Resource Name</th>
                                     <th>Resource Code</th>
-                                    <th>Actions</th>
+                                    <!-- <th>Actions</th> -->
 
                                 </thead>
                                 <tbody>
 
-                                    <tr *ngFor="let res of resources">
+                                    <tr *ngFor="let res of resources | paginate: { itemsPerPage: 5, currentPage: p1, id: 'first' }">
                                         <td>
                                             <div class="form-check">
                                                 <label class="form-check-label">
@@ -59,18 +57,20 @@
                                         </td>
                                         <td>{{res.name}}</td>
                                         <td>{{res.code}}</td>
-                                        <td class="td-actions text-right">
+                                        <!-- <td class="td-actions text-right">
                                             <button mat-raised-button type="button" matTooltip="Edit Task"  class="btn btn-primary btn-link btn-sm btn-just-icon">
                                                 <i class="material-icons">edit</i>
                                             </button>
                                             <button mat-raised-button type="button" matTooltip="Remove"  class="btn btn-danger btn-link btn-sm btn-just-icon">
                                                 <i class="material-icons">close</i>
                                             </button>
-                                        </td>
+                                        </td> -->
                                     </tr>
 
                                 </tbody>
                             </table>
+
+                            <pagination-controls (pageChange)="p1 = $event" id="first" ></pagination-controls>
                         </div>
                         <div class="tab-pane" id="messages">
                             <table class="table">
@@ -146,7 +146,7 @@
                                 </thead>
                                 <tbody>
 
-                                    <tr *ngFor="let projectResource of prValues();">
+                                    <tr *ngFor="let projectResource of prValues() | paginate: { itemsPerPage: 5, currentPage: p2 , id: 'second'};">
                                         <td>
                                             <div class="form-check">
                                                 <label class="form-check-label">
@@ -160,16 +160,14 @@
                                         <td>{{projectResource.name}}</td>
                                         <td>{{projectResource.code}}</td>
                                         <td class="td-actions text-right">
-                                            <button mat-raised-button type="button" matTooltip="Edit Task"  class="btn btn-primary btn-link btn-sm btn-just-icon">
-                                                <i class="material-icons">edit</i>
-                                            </button>
-                                            <button mat-raised-button type="button" matTooltip="Remove"  class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                               <button mat-raised-button type="button" matTooltip="Remove"  class="btn btn-danger btn-link btn-sm btn-just-icon">
                                                 <i class="material-icons">close</i>
                                             </button>
                                         </td>
                                     </tr>
                                 </tbody>
-                            </table>                   
+                            </table> 
+                            <pagination-controls (pageChange)="p2 = $event" id="second"></pagination-controls>                  
                 </div>
             </div>
         </div>

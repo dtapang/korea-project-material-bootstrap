@@ -15,6 +15,15 @@ export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
 
+
+    isLoggedIn(){
+        return (localStorage.getItem("token"))?true:false;
+    }
+    logout(){
+        localStorage.removeItem("token");
+        this.router.navigate(['/login']);// private router: Router
+    }
+
     constructor(location: Location,  private element: ElementRef, private router: Router) {
       this.location = location;
           this.sidebarVisible = false;

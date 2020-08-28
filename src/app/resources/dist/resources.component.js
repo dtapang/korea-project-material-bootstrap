@@ -8,12 +8,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.ResourcesComponent = void 0;
 var core_1 = require("@angular/core");
+var Resource_1 = require("app/models/Resource");
 var table_1 = require("@angular/material/table");
 var ResourcesComponent = /** @class */ (function () {
     function ResourcesComponent(resourceService) {
+        this.p = 1;
+        this.searchText = '';
         this.selectedResourceMap = new Map();
         this._resourceService = resourceService;
+        this.newResource = new Resource_1.Resource("", "");
     }
+    ResourcesComponent.prototype.submitForm = function (resource) {
+        console.log(resource);
+        console.log(this._resourceService.createNew(resource).subscribe());
+    };
     ResourcesComponent.prototype.ngOnInit = function () {
         var _this = this;
         this._resourceService.getall().subscribe(function (arr) {

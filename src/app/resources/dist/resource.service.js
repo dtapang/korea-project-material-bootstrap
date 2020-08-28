@@ -9,21 +9,33 @@ exports.__esModule = true;
 exports.ResourceService = void 0;
 var core_1 = require("@angular/core");
 var operators_1 = require("rxjs/operators");
+var http_1 = require("@angular/common/http");
 var ResourceService = /** @class */ (function () {
     function ResourceService(http) {
         this.http = http;
         this.url = "http://localhost:8080/korea";
-        this.ResourceItem = "/projects/" + this.id;
+        this.ResourceItem = "/resource/find/" + this.id;
         this.ResourceItems = "/resource/list";
         this.ProjectSearchItems = "/resource/search";
-        this.AddProjectItem = "/resource";
-        this.UpdateProjectItem = "/resource";
+        this.AddProjectItem = "/resource/create";
+        this.UpdateProjectItem = "/resource/update/{id}";
     }
     ResourceService.prototype.getall = function () {
         return this._get("" + this.url + this.ResourceItems);
     };
     ResourceService.prototype._get = function (url) {
         return this.http.get(url)
+            .pipe(operators_1.map(function (res) { return res; }));
+    };
+    ResourceService.prototype.createNew = function (resource) {
+        var body = new http_1.HttpParams();
+        body = body.append('grant_type', 'password');
+        body = body.append('username', userName);
+        body = body.append('password', password);
+        return this._post("" + this.url + this.AddProjectItem, resource);
+    };
+    ResourceService.prototype._post = function (url, resource) {
+        return this.http.post(url, resource)
             .pipe(operators_1.map(function (res) { return res; }));
     };
     ResourceService = __decorate([

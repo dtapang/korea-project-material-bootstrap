@@ -12,16 +12,17 @@ var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var router_1 = require("@angular/router");
+var ngx_pagination_1 = require("ngx-pagination");
 var app_routing_1 = require("./app.routing");
 var components_module_1 = require("./components/components.module");
 var app_component_1 = require("./app.component");
-var core_2 = require("@agm/core");
 var admin_layout_component_1 = require("./layouts/admin-layout/admin-layout.component");
 var http_2 = require("@angular/common/http");
 var interceptor_service_1 = require("./auth/interceptor.service");
 var app_component_2 = require("./app.component");
 var project_service_1 = require("./components/project-resources/project.service");
 var resource_service_1 = require("./resources/resource.service");
+var project_resources_service_1 = require("./components/project-resources/project-resources.service");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -36,9 +37,7 @@ var AppModule = /** @class */ (function () {
                 components_module_1.ComponentsModule,
                 router_1.RouterModule,
                 app_routing_1.AppRoutingModule,
-                core_2.AgmCoreModule.forRoot({
-                    apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
-                })
+                ngx_pagination_1.NgxPaginationModule
             ],
             declarations: [
                 app_component_1.AppComponent,
@@ -50,6 +49,7 @@ var AppModule = /** @class */ (function () {
                 app_component_1.UserService,
                 resource_service_1.ResourceService,
                 project_service_1.ProjectService,
+                project_resources_service_1.ProjectResourcesService,
                 {
                     provide: http_2.HTTP_INTERCEPTORS,
                     useClass: interceptor_service_1.InterceptorService,

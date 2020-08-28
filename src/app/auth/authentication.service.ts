@@ -21,7 +21,6 @@ logoutPath: string = "/logout";
     this.http = new HttpClient(this.handler);
   }
   options = {
-
       observe: "response" as 'body', // to display the full response & as 'body' for type cast
   };
 
