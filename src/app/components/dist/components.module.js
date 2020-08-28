@@ -10,13 +10,15 @@ exports.ComponentsModule = void 0;
 var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
 var router_1 = require("@angular/router");
+var forms_1 = require("@angular/forms");
 var footer_component_1 = require("./footer/footer.component");
 var navbar_component_1 = require("./navbar/navbar.component");
 var sidebar_component_1 = require("./sidebar/sidebar.component");
+var ngx_pagination_1 = require("ngx-pagination");
 var resource_list_component_1 = require("./resource-list/resource-list.component");
 var resources_component_1 = require("app/resources/resources.component");
 var project_resources_component_1 = require("./project-resources/project-resources.component");
-var forms_1 = require("@angular/forms");
+var search_filter_pipe_1 = require("app/pipes/search-filter.pipe");
 var ComponentsModule = /** @class */ (function () {
     function ComponentsModule() {
     }
@@ -25,7 +27,8 @@ var ComponentsModule = /** @class */ (function () {
             imports: [
                 common_1.CommonModule,
                 router_1.RouterModule,
-                forms_1.FormsModule
+                forms_1.FormsModule,
+                ngx_pagination_1.NgxPaginationModule
             ],
             declarations: [
                 footer_component_1.FooterComponent,
@@ -33,14 +36,16 @@ var ComponentsModule = /** @class */ (function () {
                 sidebar_component_1.SidebarComponent,
                 resource_list_component_1.ResourceListComponent,
                 resources_component_1.ResourcesComponent,
-                project_resources_component_1.ProjectResourcesComponent
+                project_resources_component_1.ProjectResourcesComponent,
+                search_filter_pipe_1.SearchFilterPipe
             ],
             exports: [
                 footer_component_1.FooterComponent,
                 navbar_component_1.NavbarComponent,
                 sidebar_component_1.SidebarComponent,
                 resource_list_component_1.ResourceListComponent,
-                resources_component_1.ResourcesComponent
+                resources_component_1.ResourcesComponent,
+                search_filter_pipe_1.SearchFilterPipe
             ]
         })
     ], ComponentsModule);

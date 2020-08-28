@@ -9,12 +9,15 @@ exports.__esModule = true;
 exports.ProjectResourcesComponent = void 0;
 var core_1 = require("@angular/core");
 var ProjectResourcesComponent = /** @class */ (function () {
-    function ProjectResourcesComponent(resourceService, projectService) {
+    function ProjectResourcesComponent(resourceService, projectService, prService) {
         this.resourceService = resourceService;
         this.projectService = projectService;
+        this.prService = prService;
         this.projectResourcesMap = new Map();
         this.selectedResourceMap = new Map();
         this.prCheckSet = new Set();
+        this.p1 = 1;
+        this.p2 = 1;
     }
     ProjectResourcesComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -25,7 +28,7 @@ var ProjectResourcesComponent = /** @class */ (function () {
             else {
                 _this.projects = [];
             }
-            console.log("projects " + _this.projects);
+            console.log(_this.projects);
         });
         this.resourceService.getall().subscribe(function (arr) {
             if (arr) {
@@ -36,6 +39,9 @@ var ProjectResourcesComponent = /** @class */ (function () {
             }
             console.log("resources " + _this.resources);
         });
+    };
+    ProjectResourcesComponent.prototype.submitProjectResources = function (resource, projectId) {
+        this.prService.createNew(resource, projectId).subscribe();
     };
     ProjectResourcesComponent.prototype.loadProject = function (id) {
         console.log(id);
