@@ -26,7 +26,7 @@ var LoginComponent = /** @class */ (function () {
         var _this = this;
         this.auth.loginUser(user).subscribe(function (res) {
             _this.auth.setToken(res.body.jwt);
-            _this.route.navigate(['/project']);
+            _this.route.navigate(['/project']); //private route: Router
         }, function (err) {
             console.log(err);
         });

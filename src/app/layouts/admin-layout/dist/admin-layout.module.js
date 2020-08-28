@@ -15,11 +15,6 @@ var admin_layout_routing_1 = require("./admin-layout.routing");
 var dashboard_component_1 = require("../../dashboard/dashboard.component");
 var user_profile_component_1 = require("../../user-profile/user-profile.component");
 var table_list_component_1 = require("../../table-list/table-list.component");
-var typography_component_1 = require("../../typography/typography.component");
-var icons_component_1 = require("../../icons/icons.component");
-var maps_component_1 = require("../../maps/maps.component");
-var notifications_component_1 = require("../../notifications/notifications.component");
-var upgrade_component_1 = require("../../upgrade/upgrade.component");
 var button_1 = require("@angular/material/button");
 var input_1 = require("@angular/material/input");
 var core_2 = require("@angular/material/core");
@@ -52,12 +47,7 @@ var AdminLayoutModule = /** @class */ (function () {
                 signup_component_1.SignupComponent,
                 dashboard_component_1.DashboardComponent,
                 user_profile_component_1.UserProfileComponent,
-                table_list_component_1.TableListComponent,
-                typography_component_1.TypographyComponent,
-                icons_component_1.IconsComponent,
-                maps_component_1.MapsComponent,
-                notifications_component_1.NotificationsComponent,
-                upgrade_component_1.UpgradeComponent,
+                table_list_component_1.TableListComponent
             ]
         })
     ], AdminLayoutModule);
