@@ -1,0 +1,71 @@
+<div class = main-containt>
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+  <br>  
+  <br>
+  <br>
+  <br>
+
+  <div class="dropdown">
+    <button href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="true" >
+        
+        <b class="caret">Select Project</b>
+    </button>
+    <ul class="dropdown-menu" *ngFor="let p of project">
+        <li><a href="#">{{p.name}}</a></li>
+    </ul>
+</div>
+<div class="card">
+  <div class="card-header card-header-danger">
+      <h4 class="card-title ">Formula</h4>
+      <p class="card-category"> formula page</p>
+  </div>
+
+
+  <div class="card-body">
+      <div class="table-responsive">
+          <table class="table"   >
+              <thead class=" text-primary">
+                  <th>
+                      name
+                  </th>
+                  <th>
+                      cost_code
+                  </th>
+                  <th>
+                      editable
+                  </th>
+                  <th>
+                      item_id
+                  </th>
+                </thead>
+              <tbody>
+                  <tr *ngFor="let res of resources">
+                      <td>
+                          <input class="form-check-input" type="checkbox" value="">
+                          {{res.id}}
+<span class="form-check-sign">
+<span class="check"></span>
+</span>
+                      </td>  
+                      <td>
+                          {{res.name}}
+                      </td>
+                      <td>
+                          {{res.code}}
+                      </td>
+                     
+                  </tr>
+               
+
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
