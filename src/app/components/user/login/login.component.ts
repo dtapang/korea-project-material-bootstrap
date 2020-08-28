@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import { AuthenticationService } from 'app/auth/authentication.service';
 import { User } from 'app/models/user';
 import { Form } from '@angular/forms';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpResponse } from '@angular/common/http';
 @Component({
   selector: 'app-login',
