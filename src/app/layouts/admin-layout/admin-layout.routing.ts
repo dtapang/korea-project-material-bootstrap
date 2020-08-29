@@ -11,6 +11,6 @@ export const AdminLayoutRoutes: Routes = [
     { path:"signup", component: SignupComponent },
     { path: 'project',      component: ProjectResourcesComponent , canActivate: [OnlyLoggedInUserGuard]},
     { path: 'resources',      component: ResourcesComponent , canActivate: [OnlyLoggedInUserGuard]},
-    { path: 'formula',      component: TableListComponent , canActivate: [OnlyLoggedInUserGuard]}
+    { path: 'formula',      component: FormulaComponent , canActivate: [OnlyLoggedInUserGuard]}
 ];
 
