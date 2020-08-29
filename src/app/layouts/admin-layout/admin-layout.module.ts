@@ -5,7 +5,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AdminLayoutRoutes} from './admin-layout.routing';
 import {DashboardComponent} from '../../dashboard/dashboard.component';
 import {UserProfileComponent} from '../../user-profile/user-profile.component';
-import {TableListComponent} from '../../table-list/table-list.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatRippleModule} from '@angular/material/core';
@@ -15,7 +14,6 @@ import {MatSelectModule} from '@angular/material/select';
 import {OnlyLoggedInUserGuard} from 'app/app.component';
 import {LoginComponent} from 'app/components/user/login/login.component';
 import {SignupComponent} from 'app/components/user/signup/signup.component';
-import { ProjectResourcesService } from 'app/components/project-resources/project-resources.service';
 
 @NgModule({
   imports: [
@@ -36,8 +34,7 @@ import { ProjectResourcesService } from 'app/components/project-resources/projec
     SignupComponent,
     DashboardComponent,
     UserProfileComponent,
-    TableListComponent
-  ],
+  ]
 })
 export class AdminLayoutModule {
 

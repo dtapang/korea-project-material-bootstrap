@@ -18,6 +18,7 @@ var ProjectResourcesComponent = /** @class */ (function () {
         this.prCheckSet = new Set();
         this.p1 = 1;
         this.p2 = 1;
+        this.selectedProject = 'None';
     }
     ProjectResourcesComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -28,7 +29,7 @@ var ProjectResourcesComponent = /** @class */ (function () {
             else {
                 _this.projects = [];
             }
-            console.log(_this.projects);
+            console.log("projects " + _this.projects);
         });
         this.resourceService.getall().subscribe(function (arr) {
             if (arr) {
@@ -39,6 +40,11 @@ var ProjectResourcesComponent = /** @class */ (function () {
             }
             console.log("resources " + _this.resources);
         });
+    };
+    ProjectResourcesComponent.prototype.hasProjects = function () {
+        if (this.projects) {
+            return true;
+        }
     };
     ProjectResourcesComponent.prototype.submitProjectResources = function (resource, projectId) {
         this.prService.createNew(resource, projectId).subscribe();
@@ -94,7 +100,6 @@ var ProjectResourcesComponent = /** @class */ (function () {
         });
     };
     ProjectResourcesComponent.prototype.prValues = function () {
-        var sPRValues = this.projectResourcesMap.values();
         var array = [];
         this.projectResourcesMap.forEach(function (value, key) {
             array.push(value);
