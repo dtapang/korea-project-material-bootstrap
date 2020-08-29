@@ -20,10 +20,15 @@ export class ProjectResourcesComponent implements OnInit {
 
   p1: number = 1;
   p2: number = 1;
+
+  selectedProject = 'None';
   
   constructor(private resourceService : ResourceService, 
     private projectService : ProjectService,
-    private prService: ProjectResourcesService) {}
+    private prService: ProjectResourcesService) {
+
+
+    }
 
   ngOnInit() {
     this.projectService.getall().subscribe((arr: Project[]) => {
@@ -33,7 +38,7 @@ export class ProjectResourcesComponent implements OnInit {
         this.projects = [];
       }
       
-      console.log(this.projects);
+      console.log(`projects ${this.projects}`);
     });
 
     this.resourceService.getall().subscribe((arr: Resource[]) => {
@@ -46,6 +51,12 @@ export class ProjectResourcesComponent implements OnInit {
       console.log(`resources ${this.resources}`);
     });
      
+  }
+
+  hasProjects(){
+    if(this.projects){
+      return true;
+    }
   }
 
   submitProjectResources(resource: Resource, projectId: number){
@@ -109,7 +120,6 @@ export class ProjectResourcesComponent implements OnInit {
   }
 
   prValues(){
-    let sPRValues = this.projectResourcesMap.values();
     let array = [];
     this.projectResourcesMap.forEach((value: Resource, key: number) => {
       array.push(value);
