@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Project } from '../../models/Project';
 import { ProjectService } from '../project-resources/project.service';
 import { ProjectResourcesService } from '../project-resources/project-resources.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-formula',
@@ -25,9 +26,16 @@ export class FormulaComponent implements OnInit {
   displayedColumns: string[] = ['select','name','code','editable','itemid'];
   dataSource: MatTableDataSource<Project>;
 
+  selectedProject = 'None';
+
   constructor( 
     private projectService : ProjectService,
-    private prService: ProjectResourcesService) {}
+    private prService: ProjectResourcesService,
+    private router: Router) {}
+
+  goToPage(pageName:string){
+      this.router.navigate([`${pageName}`]);
+    }
 
   ngOnInit() {
     this.projectService.getall().subscribe((arr: Project[]) => {

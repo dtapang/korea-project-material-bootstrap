@@ -11,6 +11,7 @@ var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
 var router_1 = require("@angular/router");
 var forms_1 = require("@angular/forms");
+var select_1 = require("@angular/material/select");
 var footer_component_1 = require("./footer/footer.component");
 var navbar_component_1 = require("./navbar/navbar.component");
 var sidebar_component_1 = require("./sidebar/sidebar.component");
@@ -28,7 +29,8 @@ var ComponentsModule = /** @class */ (function () {
                 common_1.CommonModule,
                 router_1.RouterModule,
                 forms_1.FormsModule,
-                ngx_pagination_1.NgxPaginationModule
+                ngx_pagination_1.NgxPaginationModule,
+                select_1.MatSelectModule
             ],
             declarations: [
                 footer_component_1.FooterComponent,

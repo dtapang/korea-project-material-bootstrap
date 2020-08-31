@@ -11,6 +11,7 @@ import { TemplateComponent } from 'app/components/template/template.component';
 export const AdminLayoutRoutes: Routes = [
     { path:"login", component: LoginComponent },
     { path:"signup", component: SignupComponent },
+
     { path: 'project', component: ProjectResourcesComponent , canActivate: [OnlyLoggedInUserGuard]},
     { path: 'resources', component: ResourcesComponent , canActivate: [OnlyLoggedInUserGuard]},
     { path: 'formula', component: FormulaComponent , canActivate: [OnlyLoggedInUserGuard]},
