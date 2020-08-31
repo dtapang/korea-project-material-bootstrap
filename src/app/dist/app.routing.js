@@ -16,7 +16,7 @@ var admin_layout_component_1 = require("./layouts/admin-layout/admin-layout.comp
 var routes = [
     {
         path: '',
-        redirectTo: 'dashboard',
+        redirectTo: 'login',
         pathMatch: 'full'
     }, {
         path: '',
