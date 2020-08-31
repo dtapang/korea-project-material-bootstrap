@@ -1,15 +1,15 @@
-import { Component, Injectable} from '@angular/core';
+import { Component, Injectable, OnInit} from '@angular/core';
 import { CanActivate } from '@angular/router';
 
 @Component({
   selector: 'app-template',
-  templateUrl: './app.template.html',
-  styleUrls: ['./app.template.css']
+  templateUrl: './template.component.html',
+  styleUrls: ['./template.component.css']
 })
-export class TemplateComponent {
+export class TemplateComponent implements OnInit {
 
   constructor () { }
 
   ngOnInit(): void { }
   
-}
+} 

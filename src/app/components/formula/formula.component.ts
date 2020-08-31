@@ -3,6 +3,7 @@ import { SelectionModel }  from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
 import { Project } from '../../models/Project';
 import { ProjectService } from '../project-resources/project.service';
+import { ProjectResourcesService } from '../project-resources/project-resources.service';
 
 @Component({
   selector: 'app-formula',
@@ -24,47 +25,30 @@ export class FormulaComponent implements OnInit {
   displayedColumns: string[] = ['select','name','code','editable','itemid'];
   dataSource: MatTableDataSource<Project>;
 
-  constructor( private projectService : ProjectService) { 
-    this.selection = new SelectionModel<Project>(this.allowMultiSelect, this.initialSelection);
-    
-    
-  }
+  constructor( 
+    private projectService : ProjectService,
+    private prService: ProjectResourcesService) {}
 
-  ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<Project>(this.project);
-    this.projectService.getall().subscribe(arr => this.project = arr);
-  }
+  ngOnInit() {
+    this.projectService.getall().subscribe((arr: Project[]) => {
+      if(arr){
+        this.project = arr;
+      }else{
+        this.project = [];
+      }
+      
+      console.log(this.project);
+    });
+
+    // this.resourceService.getall().subscribe((arr: Resource[]) => {
+      
+    //   if(arr){
+    //     this.resources = arr;
+    //   }else{
+    //     this.resources = [];
+    //   }
+    //   console.log(`resources ${this.resources});
+    };
 
    
-  /**
-   * Is called when an item from the list is checked.
-  @param selected
-   */
-  onItemCheck(selected: boolean) {
-    this.projectChecked.emit(selected);
-  }
-
-  /**
-   * Is called when task list is changed.
-  @param changedTasks
-   */
-  onResourcesChanged(changedResourcess: Project[]) {
-    this.projectChange.emit(changedResourcess);
-  }
-
-
-
-  /** Whether the number of selected elements matches the total number of rows. */
-isAllSelected() {
-  const numSelected = this.selection.selected.length;
-  const numRows = this.project.length;
-  return numSelected == numRows;
-}
-
-/** Selects all rows if they are not all selected; otherwise clear selection. */
-masterToggle() {
-  this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
-}
 }
