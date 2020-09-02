@@ -3,15 +3,18 @@ import { SelectionModel }  from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
 import { Project } from '../../models/Project';
 import { ProjectService } from '../project-resources/project.service';
+import { Subscription } from 'rxjs';
+import { ProjectResourcesService } from '../project-resources/project-resources.service';
+
 
 @Component({
   selector: 'app-formula',
   templateUrl: './formula.component.html',
   styleUrls: ['./formula.component.css']
 })
-
 export class FormulaComponent implements OnInit {
 
+  public $fromProjects: Subscription;
   @Input() project: Project[] = [];
   @Output() projectChecked: EventEmitter<boolean> = new EventEmitter();
   @Output() projectChange: EventEmitter<Project[]> = new EventEmitter();
@@ -24,15 +27,26 @@ export class FormulaComponent implements OnInit {
   displayedColumns: string[] = ['select','name','code','editable','itemid'];
   dataSource: MatTableDataSource<Project>;
 
-  constructor( private projectService : ProjectService) { 
+  constructor( private projectService : ProjectService,
+               private prService: ProjectResourcesService) { 
     this.selection = new SelectionModel<Project>(this.allowMultiSelect, this.initialSelection);
-    
-    
+  
   }
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<Project>(this.project);
     this.projectService.getall().subscribe(arr => this.project = arr);
+
+    console.log(this.prService.resourceSet);
+
+    this.$fromProjects = this.prService.getMessage().subscribe(res=>{
+      console.log(res);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.$fromProjects.unsubscribe();
+    // throw new Error("Method not implemented.");
   }
 
    

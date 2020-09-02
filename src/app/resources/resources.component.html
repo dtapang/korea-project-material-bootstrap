@@ -9,12 +9,12 @@
 
                         <span>
 
-                            <mat-form-field>
-                                <input #seachInput type="text"  [(ngModel)]="searchText"   placeholder="keyword...">
-                                <button mat-raised-button (click)="applyFilter(seachInput.value)" class="btn btn-white btn-round btn-just-icon">
-                                    <i class="material-icons">search</i>
-                                </button>
-                            </mat-form-field>
+                            
+                            <input #seachInput type="text"  [(ngModel)]="searchText"   placeholder="keyword...">
+                            <button mat-raised-button (click)="applyFilter(seachInput.value)" class="btn btn-white btn-round btn-just-icon">
+                                <i class="material-icons">search</i>
+                            </button>
+                            
 
 
 
@@ -118,7 +118,7 @@
                                     <tr *ngFor="let res of resources | searchFilter: searchText | paginate: { itemsPerPage: 5, currentPage: p }">
                                         <td>
                                             <input class="form-check-input" type="checkbox" value="">
-                                            {{res.id}}
+                                            
                                         <span class="form-check-sign">
                                             <span class="check"></span>
                                         </span>

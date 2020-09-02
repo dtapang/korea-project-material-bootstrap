@@ -8,9 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.ProjectResourcesService = void 0;
 var core_1 = require("@angular/core");
+var rxjs_1 = require("rxjs");
 var ProjectResourcesService = /** @class */ (function () {
     function ProjectResourcesService(http) {
         this.http = http;
+        this.values = [];
+        this.subject = new rxjs_1.Subject();
         this.url = "http://localhost:8080/korea";
         this.ProjectResource = "/prd/find/" + this.id;
         this.ProjectResourcesItems = "/prd/listByProject/" + this.id; ///prd/listByProject/{id}
@@ -20,6 +23,22 @@ var ProjectResourcesService = /** @class */ (function () {
             observe: "response"
         };
     }
+    ProjectResourcesService.prototype.sendMessage = function (prSet, projectId) {
+        var _this = this;
+        prSet.forEach(function (pr) {
+            _this.values.push(pr);
+        });
+        this.subject.next(this.values);
+    };
+    ProjectResourcesService.prototype.clearMessage = function () {
+        this.subject.next();
+    };
+    ProjectResourcesService.prototype.getMessage = function () {
+        return this.subject.asObservable();
+    };
+    ProjectResourcesService.prototype.getList = function () {
+        return this.values;
+    };
     ProjectResourcesService.prototype.getall = function () {
         return this._get("" + this.url + this.ProjectResourcesItems);
     };

@@ -24,6 +24,8 @@ export class ResourcesComponent implements OnInit {
   constructor(resourceService : ResourceService) { 
     this._resourceService = resourceService;
     this.newResource = new Resource("","");
+
+
   }
 
   submitForm(resource: Resource){
