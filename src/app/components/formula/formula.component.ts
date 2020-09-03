@@ -5,6 +5,7 @@ import { Project } from '../../models/Project';
 import { ProjectService } from '../project-resources/project.service';
 import { ProjectResourcesService } from '../project-resources/project-resources.service';
 import { Router } from '@angular/router';
+import { Formula } from '../../models/Formula';
 
 @Component({
   selector: 'app-formula',
@@ -22,9 +23,16 @@ export class FormulaComponent implements OnInit {
   allowMultiSelect = true;
   selection: SelectionModel<Project>;
 
+  public Formulas: Formula[] = [
+    {name:'name1', cost_code:'123', editable:true, item_id:'456'},
+    {name:'name2', cost_code:'789', editable:false, item_id:'012'}
+  ];
 
-  displayedColumns: string[] = ['select','name','code','editable','itemid'];
-  dataSource: MatTableDataSource<Project>;
+
+  // displayedColumns: string[] = ['select','name','code','editable','itemid'];
+  // dataSource: MatTableDataSource<Project>;
+  displayedColumns: string[] = ['name', 'cost_code', 'editable', 'item_id'];
+  dataSource = Formula;
 
   selectedProject = 'None';
 
@@ -44,18 +52,14 @@ export class FormulaComponent implements OnInit {
       }else{
         this.project = [];
       }
+      // this.Formulas = [
+      //   {name:'name1', cost_code:'123', editable:true, item_id:'456'},
+      //   {name:'name2', cost_code:'789', editable:false, item_id:'012'}
+      // ];
       
       console.log(this.project);
-    });
+    })
 
-    // this.resourceService.getall().subscribe((arr: Resource[]) => {
-      
-    //   if(arr){
-    //     this.resources = arr;
-    //   }else{
-    //     this.resources = [];
-    //   }
-    //   console.log(`resources ${this.resources});
     };
 
    

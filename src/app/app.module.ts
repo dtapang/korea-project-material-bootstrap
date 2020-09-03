@@ -3,7 +3,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MatSelectModule } from '@angular/material/select';
+import { CommonModule } from "@angular/common";
+
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
@@ -27,7 +30,9 @@ import { ProjectResourcesService } from './components/project-resources/project-
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatSelectModule,
+    CommonModule
   ],
   declarations: [
     AppComponent,
