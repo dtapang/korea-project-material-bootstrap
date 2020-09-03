@@ -41,9 +41,9 @@ export class FormulaComponent implements OnInit {
     private prService: ProjectResourcesService,
     private router: Router) {}
 
-  goToPage(pageName:string){
-      this.router.navigate([`${pageName}`]);
-    }
+  // goToPage(pageName:string){
+  //     this.router.navigate([`${pageName}`]);
+  //   }
 
   ngOnInit() {
     this.projectService.getall().subscribe((arr: Project[]) => {
@@ -52,15 +52,15 @@ export class FormulaComponent implements OnInit {
       }else{
         this.project = [];
       }
-      // this.Formulas = [
-      //   {name:'name1', cost_code:'123', editable:true, item_id:'456'},
-      //   {name:'name2', cost_code:'789', editable:false, item_id:'012'}
-      // ];
+      this.Formulas = [
+        {name:'name1', cost_code:'123', editable:true, item_id:'456'},
+        {name:'name2', cost_code:'789', editable:false, item_id:'012'}
+      ];
       
       console.log(this.project);
     })
 
     };
+  }
 
    
-}
