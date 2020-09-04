@@ -8,14 +8,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.ProjectResourcesComponent = void 0;
 var core_1 = require("@angular/core");
+var ResourceItem_1 = require("app/models/ResourceItem");
 var ProjectResourcesComponent = /** @class */ (function () {
-    function ProjectResourcesComponent(resourceService, projectService, prService) {
+    function ProjectResourcesComponent(resourceService, projectService, prService, route) {
         this.resourceService = resourceService;
         this.projectService = projectService;
         this.prService = prService;
-        this.projectResourcesMap = new Map();
-        this.selectedResourceMap = new Map();
-        this.prCheckSet = new Set();
+        this.route = route;
         this.p1 = 1;
         this.p2 = 1;
         this.selectedProject = 'None';
@@ -29,83 +28,55 @@ var ProjectResourcesComponent = /** @class */ (function () {
             else {
                 _this.projects = [];
             }
-            console.log("projects " + _this.projects);
+            console.log("projects array: " + _this.projects);
         });
+        this.resources = new Set();
+        this.projectResources = new Set();
         this.resourceService.getall().subscribe(function (arr) {
             if (arr) {
-                _this.resources = arr;
+                arr.forEach(function (res) {
+                    _this.resources.add(new ResourceItem_1.ResourceItem(res, false));
+                });
             }
-            else {
-                _this.resources = [];
-            }
-            console.log("resources " + _this.resources);
+            console.log("resources set: " + _this.resources);
         });
     };
     ProjectResourcesComponent.prototype.hasProjects = function () {
         if (this.projects) {
             return true;
         }
+        return false;
     };
-    ProjectResourcesComponent.prototype.submitProjectResources = function (resource, projectId) {
-        this.prService.createNew(resource, projectId).subscribe();
+    ProjectResourcesComponent.prototype.submitProjectResources = function () {
+        this.prService.resourceSet = this.projectResources;
+        this.route.navigate(['/formula']); //private route: Router
     };
-    ProjectResourcesComponent.prototype.loadProject = function (id) {
-        console.log(id);
-    };
-    ProjectResourcesComponent.prototype.onCheck = function (id) {
-        //Add selected resource to srMap where res.id == id
-        var obj = this.resources.find(function (obj) { return obj.id == id; });
-        this.selectedResourceMap.set(id, obj);
-    };
-    ProjectResourcesComponent.prototype.onPRCheck = function (id) {
-        //Add selected resource to srMap where res.id == id
-        this.prCheckSet.add(id);
-    };
-    ProjectResourcesComponent.prototype.findObjectByKey = function (array, key, value) {
-        for (var i = 0; i < array.length; i++) {
-            if (array[i][key] === value) {
-                return array[i];
+    ProjectResourcesComponent.prototype.addToProject = function () {
+        var $self = this.projectResources;
+        this.resources.forEach(function (resItem) {
+            if (resItem.selected) {
+                $self.add(resItem);
             }
-        }
-        return null;
+        });
+        this.projectResources = $self;
     };
-    ProjectResourcesComponent.prototype.onUncheck = function (id) {
-        this.selectedResourceMap["delete"](id);
-    };
-    ProjectResourcesComponent.prototype.onPRUncheck = function (id) {
-        this.prCheckSet["delete"](id);
-    };
-    ProjectResourcesComponent.prototype.onNativeChange = function (e, id) {
-        if (e.target.checked) { //checked
-            this.onCheck(id);
-        }
-        else {
-            //unchecked
-            this.onUncheck(id);
-        }
-    };
-    ProjectResourcesComponent.prototype.onPRItemChange = function (e, id) {
-        if (e.target.checked) { //checked
-            this.onPRCheck(id);
-        }
-        else {
-            //unchecked
-            this.onPRUncheck(id);
-        }
-    };
-    ProjectResourcesComponent.prototype.addSelectedResourcesToProject = function () {
-        var _this = this;
-        this.selectedResourceMap.forEach(function (value, key) {
-            _this.projectResourcesMap.set(key, value);
+    ProjectResourcesComponent.prototype.deleteSelected = function () {
+        var $self = this.projectResources;
+        this.projectResources.forEach(function (resItem) {
+            if (resItem.selected) {
+                $self["delete"](resItem);
+            }
         });
     };
-    ProjectResourcesComponent.prototype.prValues = function () {
-        var array = [];
-        this.projectResourcesMap.forEach(function (value, key) {
-            array.push(value);
+    ProjectResourcesComponent.prototype.selectAllResources = function () {
+        this.resources.forEach(function (item) {
+            item.selected = true;
         });
-        return array;
-        //return sPRValues;
+    };
+    ProjectResourcesComponent.prototype.clearselectedResources = function () {
+        this.resources.forEach(function (item) {
+            item.selected = false;
+        });
     };
     ProjectResourcesComponent = __decorate([
         core_1.Component({
