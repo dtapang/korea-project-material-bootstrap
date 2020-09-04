@@ -24,10 +24,13 @@
           <p class="category">exsiting features</p>
       </div>
       <div class="card-body">
-            item_id
-            <br>
+            name
             <br>
             cost_code
+            <br>
+            editable
+            <br>
+            item_id
       </div>
   </div>
 </div>
@@ -46,12 +49,12 @@
             <span class="input-group-text" id="inputGroup-sizing-default">field name</span>
           </div>
           
-          <div *ngFor="let formula of formulas">
-            Field: <input [value]="formula.field" (keydown.Enter)="formula">
-            <input *ngIf="hasFormula(formula)">
+          <!-- <div *ngFor="let formula of templates">
+            Field: <input [value]="template.field" (keydown.Enter)="template">
+            <input *ngIf="hasFormula(field)"> -->
           
           <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-          </div>
+          <!-- </div> -->
         </div>
 
         <div class="dropdown">
@@ -65,8 +68,8 @@
           </div>
         </div>
 
-        <button onclick="document.body.insertAdjacentHTML('beforeEnd','<input type=text>')" class="btn btn-primary btn-round">add field</button>
-
+        <button onclick="addField()" class="btn btn-primary btn-round">add field</button>
+        
       </div>
   </div>
 </div>
@@ -76,7 +79,8 @@
 </div>
 
 
-  </div>
 </div>
 </div>
+</div>
+
 

@@ -12,7 +12,8 @@ import { Template } from '../../models/Template';
 
 export class TemplateComponent {
 
-  public tenmplates: Template[] = [];
+  public templates: Template[] = [];
+  field: any;
 
   hasFormula(field: Template) {
     if(field.field){
@@ -26,9 +27,10 @@ export class TemplateComponent {
   constructor () { } 
 
   ngOnInit(): void { }
-
-  newField() {
-
+  
+  
+  addField() {
+    this.field.push(new Template());
   }
   
 } 
