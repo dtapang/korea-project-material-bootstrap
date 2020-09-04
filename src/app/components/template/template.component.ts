@@ -42,5 +42,9 @@ export class TemplateComponent {
       fieldname:''
     });
   }
+
+  removeField(i: number) {
+    this.fields.splice(i, 1);
+  }
   
 } 
