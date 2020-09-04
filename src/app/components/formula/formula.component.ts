@@ -1,20 +1,26 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { SelectionModel }  from '@angular/cdk/collections';
+import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
-import { Project } from '../../models/Project';
 import { ProjectService } from '../project-resources/project.service';
+import { Subscription } from 'rxjs';
+import { ProjectResourcesService } from '../project-resources/project-resources.service';
+import { ResourceService } from 'app/resources/resource.service';
+import { Resource } from 'app/models/Resource';
+import { Project } from 'app/models/Project';
+import {Router} from '@angular/router';
+import { ResourceItem } from 'app/models/ResourceItem';
+
+
 
 @Component({
   selector: 'app-formula',
   templateUrl: './formula.component.html',
   styleUrls: ['./formula.component.css']
 })
-
 export class FormulaComponent implements OnInit {
 
-  @Input() project: Project[] = [];
-  @Output() projectChecked: EventEmitter<boolean> = new EventEmitter();
-  @Output() projectChange: EventEmitter<Project[]> = new EventEmitter();
+  public $fromProjects: Subscription;
+  projects: Project[] = [];
 
   initialSelection = [];
   allowMultiSelect = true;
@@ -23,48 +29,35 @@ export class FormulaComponent implements OnInit {
 
   displayedColumns: string[] = ['select','name','code','editable','itemid'];
   dataSource: MatTableDataSource<Project>;
+  selectedProject: string;
 
-  constructor( private projectService : ProjectService) { 
+  constructor( private projectService: ProjectService,
+               private prService: ProjectResourcesService){
     this.selection = new SelectionModel<Project>(this.allowMultiSelect, this.initialSelection);
-    
-    
-  }
+    }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<Project>(this.project);
-    this.projectService.getall().subscribe(arr => this.project = arr);
+
+    this.dataSource = new MatTableDataSource<Project>(this.projects);
+
+    this.projectService.getall().subscribe((arr: Project[]) => {
+      if(arr){
+        this.projects = arr;
+      }else{
+        this.projects = [];
+      }
+      console.log(`projects array: ${this.projects}`);
+    });
+
+    console.log(this.prService.resourceSet);
+
+
   }
 
-   
-  /**
-   * Is called when an item from the list is checked.
-  @param selected
-   */
-  onItemCheck(selected: boolean) {
-    this.projectChecked.emit(selected);
-  }
-
-  /**
-   * Is called when task list is changed.
-  @param changedTasks
-   */
-  onResourcesChanged(changedResourcess: Project[]) {
-    this.projectChange.emit(changedResourcess);
+  OnDestroy(): void {
+    this.$fromProjects.unsubscribe();
+    // throw new Error("Method not implemented.");
   }
 
 
-
-  /** Whether the number of selected elements matches the total number of rows. */
-isAllSelected() {
-  const numSelected = this.selection.selected.length;
-  const numRows = this.project.length;
-  return numSelected == numRows;
-}
-
-/** Selects all rows if they are not all selected; otherwise clear selection. */
-masterToggle() {
-  this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
-}
 }

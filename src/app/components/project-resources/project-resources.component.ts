@@ -4,6 +4,10 @@ import { Resource } from 'app/models/Resource';
 import { Project } from 'app/models/Project';
 import { ProjectService } from './project.service';
 import { ProjectResourcesService } from './project-resources.service';
+import {Router} from '@angular/router';
+import { ResourceItem } from 'app/models/ResourceItem';
+
+
 
 @Component({
   selector: 'app-project-resources',
@@ -11,121 +15,89 @@ import { ProjectResourcesService } from './project-resources.service';
   styleUrls: ['./project-resources.component.css']
 })
 export class ProjectResourcesComponent implements OnInit {
-
-  resources: Resource[];
+  
+  projectResources: Set<ResourceItem>;
+  resources: Set<ResourceItem>;
   projects: Project[];
-  projectResourcesMap: Map<number, Resource> = new Map<number, Resource>();
-  selectedResourceMap : Map<number, Resource> = new Map<number, Resource>();
-  prCheckSet = new Set();
-
   p1: number = 1;
   p2: number = 1;
 
   selectedProject = 'None';
+  projectId: number;
   
   constructor(private resourceService : ResourceService, 
     private projectService : ProjectService,
-    private prService: ProjectResourcesService) {
-
-
-    }
+    private prService: ProjectResourcesService,
+    private route: Router) {}
 
   ngOnInit() {
+    
     this.projectService.getall().subscribe((arr: Project[]) => {
       if(arr){
         this.projects = arr;
       }else{
         this.projects = [];
-      }
-      
-      console.log(`projects ${this.projects}`);
+      }      
+      console.log(`projects array: ${this.projects}`);
     });
 
+    this.resources = new Set();
+    this.projectResources = new Set();
     this.resourceService.getall().subscribe((arr: Resource[]) => {
       
       if(arr){
-        this.resources = arr;
-      }else{
-        this.resources = [];
+        arr.forEach(res => {
+          this.resources.add(new ResourceItem(res, false));
+        });
       }
-      console.log(`resources ${this.resources}`);
+ 
+      console.log(`resources set: ${this.resources}`);
     });
-     
+  
   }
 
   hasProjects(){
     if(this.projects){
       return true;
     }
+    return false;
   }
 
-  submitProjectResources(resource: Resource, projectId: number){
-    this.prService.createNew(resource, projectId).subscribe();
+  submitProjectResources(){
+    this.prService.resourceSet = this.projectResources;
+    this.route.navigate(['/formula']);//private route: Router
   }
 
-  loadProject(id: number){
-    console.log(id);
+  addToProject(){
+    let $self = this.projectResources;
+    this.resources.forEach((resItem)=>{
+      if(resItem.selected){
+        $self.add(resItem);
+      }
+    });
+    this.projectResources = $self;
   }
 
-  onCheck(id: number){
-    //Add selected resource to srMap where res.id == id
-    let obj = this.resources.find(obj => obj.id == id);
-    this.selectedResourceMap.set(id, obj);
+  deleteSelected(){
+    let $self = this.projectResources;
+    this.projectResources.forEach((resItem)=>{
+      if(resItem.selected){
+        $self.delete(resItem);
+      }
+    });
+
   }
 
-  onPRCheck(id: number){
-    //Add selected resource to srMap where res.id == id
-    this.prCheckSet.add(id);
-  }
-
-  findObjectByKey(array, key, value) {
-    for (var i = 0; i < array.length; i++) {
-        if (array[i][key] === value) {
-            return array[i];
-        }
-    }
-    return null;
-  }
-
-  onUncheck(id: number){
-    this.selectedResourceMap.delete(id);
-  }
-
-  onPRUncheck(id: number){
-    this.prCheckSet.delete(id);
-  }
-
-  onNativeChange(e: any, id: number) { // here e is a boolean, true if checked, otherwise false
-    if(e.target.checked){//checked
-      this.onCheck(id);
-    }else{
-      //unchecked
-      this.onUncheck(id);
-    }
-  }
-
-  onPRItemChange(e: any, id: number){
-    if(e.target.checked){//checked
-      this.onPRCheck(id);
-    }else{
-      //unchecked
-      this.onPRUncheck(id);
-    }
-  }
-
-  addSelectedResourcesToProject(){
-    this.selectedResourceMap.forEach((value: Resource, key: number) => {
-      this.projectResourcesMap.set(key,value);
+  selectAllResources(){
+    this.resources.forEach((item)=>{
+      item.selected = true;
     });
   }
 
-  prValues(){
-    let array = [];
-    this.projectResourcesMap.forEach((value: Resource, key: number) => {
-      array.push(value);
+  clearselectedResources(){
+    this.resources.forEach((item)=>{
+      item.selected = false;
     });
-    return array;
-    //return sPRValues;
   }
 
 }

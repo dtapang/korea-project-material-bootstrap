@@ -11,6 +11,7 @@ import {ResourceListComponent} from './resource-list/resource-list.component';
 import {ResourcesComponent} from 'app/resources/resources.component';
 import {ProjectResourcesComponent} from './project-resources/project-resources.component';
 import {SearchFilterPipe} from 'app/pipes/search-filter.pipe';
+import {FormulaComponent} from './formula/formula.component';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import {SearchFilterPipe} from 'app/pipes/search-filter.pipe';
     ResourceListComponent,
     ResourcesComponent,
     ProjectResourcesComponent,
+    FormulaComponent,
     SearchFilterPipe
   ],
    exports: [

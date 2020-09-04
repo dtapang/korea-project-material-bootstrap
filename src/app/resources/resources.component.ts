@@ -11,7 +11,7 @@ import {SearchFilterPipe} from '../pipes/search-filter.pipe'
 })
 export class ResourcesComponent implements OnInit {
 
-  private _resourceService : ResourceService;
+  private _resourceService: ResourceService;
   resources: Resource[];
   dataSource: MatTableDataSource<Resource>;
   p: number = 1;
@@ -19,16 +19,18 @@ export class ResourcesComponent implements OnInit {
 
   newResource: Resource;
 
-  selectedResourceMap : Map<number, Resource> = new Map<number, Resource>();
+  selectedResourceMap: Map<number, Resource> = new Map<number, Resource>();
 
-  constructor(resourceService : ResourceService) { 
+  constructor(resourceService: ResourceService) {
     this._resourceService = resourceService;
     this.newResource = new Resource("","");
   }
 
   submitForm(resource: Resource){
     console.log(resource);
-    console.log(this._resourceService.createNew(resource).subscribe());
+    this._resourceService.createNew(resource).subscribe();
+    this.resources.push(resource);
+    console.log(this.resources);
   }
 
   ngOnInit() {
@@ -41,25 +43,6 @@ export class ResourcesComponent implements OnInit {
   applyFilter(value: string) {
     const filterValue = value
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  onCheck(id: number){
-    this.selectedResourceMap.set(id, this.resources[id]);
-  }
-
-  onUncheck(id: number){
-    this.selectedResourceMap.delete(id);
-  }
-
-  addNewResource(event: Resource){
-
-    console.log(event);
-    
-    this.resources.push(event);
-    this.dataSource = new MatTableDataSource(this.resources);
-
-    //TODO: submit to API: Back
-
   }
 
 }
