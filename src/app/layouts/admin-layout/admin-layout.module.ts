@@ -14,6 +14,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {OnlyLoggedInUserGuard} from 'app/app.component';
 import {LoginComponent} from 'app/components/user/login/login.component';
 import {SignupComponent} from 'app/components/user/signup/signup.component';
+import {TemplateComponent} from 'app/components/template/template.component';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import {SignupComponent} from 'app/components/user/signup/signup.component';
     SignupComponent,
     DashboardComponent,
     UserProfileComponent,
+    TemplateComponent
   ]
 })
 export class AdminLayoutModule {

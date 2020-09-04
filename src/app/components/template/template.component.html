@@ -1,54 +1,82 @@
-<!DOCTYPE html>
-<head>
-    <meta charset="UTF-8">
-    <title>template page</title>
-</head>
+<div class = main-containt>
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+  <br>  
+  <br>
+  <br>
+  <br>
 
-<div class="togglebutton">
-    <label>
-      <input type="checkbox" checked="">
-        <span class="toggle"></span>
-        name
-    </label>
-  </div>
-  
-<div class="togglebutton">
-    <label>
-      <input type="checkbox">
-        <span class="toggle"></span>
-        cost_code
-    </label>
-</div>
+ <div class="card">
+  <div class="card-header card-header-danger">
+      <h4 class="card-title ">Template</h4>
+      <p class="card-category"> template page</p>
+ </div>
 
-<div class="togglebutton">
-    <label>
-      <input type="checkbox">
-        <span class="toggle"></span>
-        editable
-    </label>
-</div>
+<div class="container-fluid">
+<div class = "row">
 
-<div class="togglebutton">
-    <label>
-      <input type="checkbox">
-        <span class="toggle"></span>
-        item_id
-    </label>
-</div>
+<div class="col-lg-6 col-md-12">
 
-<div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-default">filed</span>
-    </div>
-    <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-</div>
-
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    type
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">number</a>
-    <a class="dropdown-item" href="#">formula</a>
+  <div class="card">
+      <div class="card-header card-header-danger">
+          <h4 class="card-title">project scope fields</h4>
+          <p class="category">exsiting features</p>
+      </div>
+      <div class="card-body">
+            item_id
+            <br>
+            <br>
+            cost_code
+      </div>
   </div>
 </div>
+</div>
+
+<div class="col-lg-6 col-md-12">
+
+  <div class="card">
+      <div class="card-header card-header-danger">
+          <h4 class="card-title">quantity survey fields</h4>
+          <p class="category">custimized fileds</p>
+      </div>
+      <div class="card-body">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">field name</span>
+          </div>
+          
+          <div *ngFor="let formula of formulas">
+            Field: <input [value]="formula.field" (keydown.Enter)="formula">
+            <input *ngIf="hasFormula(formula)">
+          
+          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            field type
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">type 1</a>
+            <a class="dropdown-item" href="#">type 2</a>
+            <a class="dropdown-item" href="#">type 3</a>
+          </div>
+        </div>
+
+        <button onclick="document.body.insertAdjacentHTML('beforeEnd','<input type=text>')" class="btn btn-primary btn-round">add field</button>
+
+      </div>
+  </div>
+</div>
+</div>
+
+</div>
+</div>
+
+
+  </div>
+</div>
+</div>
+
