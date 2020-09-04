@@ -11,9 +11,18 @@ import {Formula} from '../../models/Formula';
 })
 export class TemplateComponent {
 
+  public templates: Template[] = [];
+  field: any;
+
   public tenmplates: Template[] = [];
   text: string;
   formulas: Formula[];
+
+  public fields: any[] = [{
+    id:1,
+    fieldname: ''
+
+  }];
 
   constructor () { }
 
@@ -25,9 +34,13 @@ export class TemplateComponent {
   }
 
   ngOnInit(): void { }
-
-  newField() {
-
+  
+  
+  addField() {
+    this.fields.push({
+      id: this.fields.length + 1,
+      fieldname:''
+    });
   }
   
 } 

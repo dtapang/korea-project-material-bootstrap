@@ -6,10 +6,11 @@ import { Subscription } from 'rxjs';
 import { ResourceService } from 'app/resources/resource.service';
 import { Resource } from 'app/models/Resource';
 import { Project } from 'app/models/Project';
-import {Router} from '@angular/router';
 import { ResourceItem } from 'app/models/ResourceItem';
 import { ProjectResourcesService } from '../project-resources/project-resources.service';
 import { Formula } from '../../models/Formula';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -33,7 +34,7 @@ export class FormulaComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'cost_code', 'editable', 'item_id'];
   dataSource = Formula;
-  selectedProject = 'None';
+  // selectedProject = 'None';
 
   constructor( private projectService: ProjectService,
                private prService: ProjectResourcesService,
