@@ -8,8 +8,9 @@ import { Resource } from 'app/models/Resource';
 import { Project } from 'app/models/Project';
 import { ResourceItem } from 'app/models/ResourceItem';
 import { ProjectResourcesService } from '../project-resources/project-resources.service';
-import { Router } from '@angular/router';
 import { Formula } from '../../models/Formula';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -31,7 +32,6 @@ export class FormulaComponent implements OnInit {
     {name:'name2', cost_code:'789', editable:false, item_id:'012'}
   ];
 
-  selectedProject: string;
   displayedColumns: string[] = ['name', 'cost_code', 'editable', 'item_id'];
   dataSource = Formula;
   // selectedProject = 'None';

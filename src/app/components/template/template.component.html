@@ -1,4 +1,4 @@
-<div class = main-containt>
+<div class = main-container>
   <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
@@ -44,20 +44,16 @@
           <p class="category">custimized fileds</p>
       </div>
       <div class="card-body">
-        <div class="input-group mb-3">
+        <!-- <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default">field name</span>
           </div>
           
-          <!-- <div *ngFor="let formula of templates">
-            Field: <input [value]="template.field" (keydown.Enter)="template">
-            <input *ngIf="hasFormula(field)"> -->
           
           <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-          <!-- </div> -->
-        </div>
+        </div> -->
 
-        <div class="dropdown">
+        <!-- <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             field type
           </button>
@@ -66,10 +62,15 @@
             <a class="dropdown-item" href="#">type 2</a>
             <a class="dropdown-item" href="#">type 3</a>
           </div>
-        </div>
-
-        <button onclick="addField()" class="btn btn-primary btn-round">add field</button>
-        
+        </div> -->
+      <div>
+        <button (click)="addField()" class="btn btn-primary btn-round">add field</button>
+        <section class="container border mb-4 p-3" *ngFor="let fieldname of fields; let i = index;">
+         <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="fieldname.fieldname"
+           name="fieldname_{{i}}"/>
+           <span class="input-group-text" id="inputGroup-sizing-default">new field</span>
+        </section>
+      </div>
       </div>
   </div>
 </div>
