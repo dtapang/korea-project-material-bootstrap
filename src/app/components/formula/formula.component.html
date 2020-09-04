@@ -8,8 +8,6 @@
   <br>
 
             <div class="card text-center width-twenty">
-
-
                 <div class="card-header">
             <span>
                 <h4 class="card-title">Selected Project</h4>
@@ -34,8 +32,8 @@
       <p class="card-category"> formula page</p>
   </div>
 
-
   <div class="card-body">
+
       <div class="table-responsive">
           <table class="table"   >
               <thead class=" text-primary">
@@ -73,11 +71,46 @@
 
               </tbody>
           </table>
-      </div>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      
+        <!-- name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> name </th>
+          <td mat-cell *matCellDef="let formulas"> {{formulas.name}} </td>
+        </ng-container>
+      
+        <!-- cost_code Column -->
+        <ng-container matColumnDef="cost_code">
+          <th mat-header-cell *matHeaderCellDef> cost_code </th>
+          <td mat-cell *matCellDef="let formulas"> {{formulas.cost_code}} </td>
+        </ng-container>
+      
+        <!-- editable Column -->
+        <ng-container matColumnDef="editable">
+          <th mat-header-cell *matHeaderCellDef> editable </th>
+          <td mat-cell *matCellDef="let element"> {{formulas.editable}} </td>
+        </ng-container>
+      
+        <!-- item_id Column -->
+        <ng-container matColumnDef="item_id">
+          <th mat-header-cell *matHeaderCellDef> item_id </th>
+          <td mat-cell *matCellDef="let element"> {{formulas.item_id}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
   </div>
 </div>
 </div>
 </div>
 </div>
 
+
 </div>
+
+<button (click)="goToPage('template')" class="btn btn-primary btn-round">
+    <span>Go to Template Page</span>
+</button>

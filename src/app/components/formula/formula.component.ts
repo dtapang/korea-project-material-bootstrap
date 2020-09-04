@@ -3,13 +3,14 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
 import { ProjectService } from '../project-resources/project.service';
 import { Subscription } from 'rxjs';
-import { ProjectResourcesService } from '../project-resources/project-resources.service';
 import { ResourceService } from 'app/resources/resource.service';
 import { Resource } from 'app/models/Resource';
 import { Project } from 'app/models/Project';
 import {Router} from '@angular/router';
 import { ResourceItem } from 'app/models/ResourceItem';
-
+import { ProjectResourcesService } from '../project-resources/project-resources.service';
+import { Router } from '@angular/router';
+import { Formula } from '../../models/Formula';
 
 
 @Component({
@@ -26,20 +27,25 @@ export class FormulaComponent implements OnInit {
   allowMultiSelect = true;
   selection: SelectionModel<Project>;
 
+  public Formulas: Formula[] = [
+    {name:'name1', cost_code:'123', editable:true, item_id:'456'},
+    {name:'name2', cost_code:'789', editable:false, item_id:'012'}
+  ];
 
-  displayedColumns: string[] = ['select','name','code','editable','itemid'];
-  dataSource: MatTableDataSource<Project>;
   selectedProject: string;
+  displayedColumns: string[] = ['name', 'cost_code', 'editable', 'item_id'];
+  dataSource = Formula;
+  selectedProject = 'None';
 
   constructor( private projectService: ProjectService,
-               private prService: ProjectResourcesService){
+               private prService: ProjectResourcesService,
+               private router: Router){
     this.selection = new SelectionModel<Project>(this.allowMultiSelect, this.initialSelection);
-    }
+   }
 
   ngOnInit(): void {
 
-    this.dataSource = new MatTableDataSource<Project>(this.projects);
-
+    
     this.projectService.getall().subscribe((arr: Project[]) => {
       if(arr){
         this.projects = arr;
@@ -50,9 +56,17 @@ export class FormulaComponent implements OnInit {
     });
 
     console.log(this.prService.resourceSet);
-
-
+    
+      this.Formulas = [
+        {name:'name1', cost_code:'123', editable:true, item_id:'456'},
+        {name:'name2', cost_code:'789', editable:false, item_id:'012'}
+      ];
   }
+  
+ goToPage(pageName:string){
+   this.router.navigate([`${pageName}`]);
+ }
+
 
   OnDestroy(): void {
     this.$fromProjects.unsubscribe();
@@ -61,3 +75,4 @@ export class FormulaComponent implements OnInit {
 
 
 }
+

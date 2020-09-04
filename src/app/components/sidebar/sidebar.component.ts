@@ -12,9 +12,9 @@ export const ROUTES: RouteInfo[] = [
   { path:"/signup", title: 'Signup',  icon:'person', class: '' },
   { path: '/project', title: 'Project',  icon: 'library_books', class: '' },
   { path: '/resources', title: 'Resource',  icon: 'content_paste', class: '' },
-  { path: '/formula', title: 'Formula',  icon: 'content_paste', class: '' }
+  { path: '/formula', title: 'Formula',  icon: 'content_paste', class: '' },
  
-    // { path: '/typography', title: 'Typography',  icon:'library_books', class: '' },
+  { path: '/template', title: 'Template',  icon:'content_paste', class: '' }
     // { path: '/icons', title: 'Icons',  icon:'bubble_chart', class: '' },
     // { path: '/maps', title: 'Maps',  icon:'location_on', class: '' },
     // { path: '/notifications', title: 'Notifications',  icon:'notifications', class: '' },
