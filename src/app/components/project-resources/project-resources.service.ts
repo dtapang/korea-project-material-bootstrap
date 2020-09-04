@@ -32,6 +32,7 @@ export class ProjectResourcesService {
   };  
 
   resources: Resource[];
+    selectedProject: string;
   constructor(private http: HttpClient) { }
 
   sendMessage(prSet: Set<number>, projectId: number) {

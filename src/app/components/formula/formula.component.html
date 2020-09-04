@@ -12,13 +12,13 @@
             <span>
                 <h4 class="card-title">Selected Project</h4>
             </span>
-                    <p class="card-category">{{selectedProject}}</p>
+                    <p class="card-category">{{prService.selectedProject}}</p>
                 </div>
 
                 <div class="card-body">
                     <div class="tab-content">
 
-                        <mat-select placeholder="Selected Project" [(value)]="selectedProject">
+                        <mat-select placeholder="Selected Project" [(value)]="prService.selectedProject">
                             <mat-option *ngFor="let p of projects" [value]="p.name" >
                                 {{p.name}}
                             </mat-option>

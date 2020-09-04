@@ -7,8 +7,6 @@ import { ProjectResourcesService } from './project-resources.service';
 import {Router} from '@angular/router';
 import { ResourceItem } from 'app/models/ResourceItem';
 
-
-
 @Component({
   selector: 'app-project-resources',
   templateUrl: './project-resources.component.html',
@@ -34,7 +32,7 @@ export class ProjectResourcesComponent implements OnInit {
     
     this.projectService.getall().subscribe((arr: Project[]) => {
       if(arr){
-        this.projects = arr;
+        this.projects = [...arr];
       }else{
         this.projects = [];
       }      
@@ -46,7 +44,7 @@ export class ProjectResourcesComponent implements OnInit {
     this.resourceService.getall().subscribe((arr: Resource[]) => {
       
       if(arr){
-        arr.forEach(res => {
+        [...arr].forEach(res => {
           this.resources.add(new ResourceItem(res, false));
         });
       }
