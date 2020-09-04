@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
   onClickSubmit(user: User) {
     this.auth.loginUser(user).subscribe( (res: HttpResponse<any>)  => {
           this.auth.setToken(res.body.jwt);
-          this.route.navigate(['/project']);//private route: Router
+          this.route.navigate(['/resources']);//private route: Router
       },
     err => {
       console.log(err);

@@ -1,33 +1,77 @@
-<div class = main-containt>
-    <div class="container-fluid">
-      <div class="row">
-          <div class="col-md-12">
-    <br>  
-    <br>
-    <br>
-    <br>
-    <div class="Select Project">
-      <button href="#" class="btn btn-primary dropdown-toggle" aria-expanded="true" >
-        <b class="caret">Select Project</b>
-        <mat-select placeholder="Select Project" [(value)]="selectedProject">
-            <mat-option *ngFor="let p of project" [value]="p.name">
-            {{p.name}}
-            </mat-option>
-        </mat-select> 
-      </button>
-      <p class="card-category">{{selectedProject}}</p>
-    </div>
+<div class = main-container>
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+  <br>  
+  <br>
+  <br>
+  <br>
 
-<div class="container-fluid">
+            <div class="card text-center width-twenty">
+                <div class="card-header">
+            <span>
+                <h4 class="card-title">Selected Project</h4>
+            </span>
+                    <p class="card-category">{{selectedProject}}</p>
+                </div>
 
- <div class="card">
+                <div class="card-body">
+                    <div class="tab-content">
+
+                        <mat-select placeholder="Selected Project" [(value)]="selectedProject">
+                            <mat-option *ngFor="let p of projects" [value]="p.name" >
+                                {{p.name}}
+                            </mat-option>
+                        </mat-select>
+
+                    </div>
+                </div>
+<div class="card">
   <div class="card-header card-header-danger">
       <h4 class="card-title ">Formula</h4>
       <p class="card-category"> formula page</p>
   </div>
 
-
   <div class="card-body">
+
+      <div class="table-responsive">
+          <table class="table"   >
+              <thead class=" text-primary">
+                  <th>
+                      name
+                  </th>
+                  <th>
+                      cost_code
+                  </th>
+                  <th>
+                      editable
+                  </th>
+                  <th>
+                      item_id
+                  </th>
+                </thead>
+              <tbody>
+                  <tr *ngFor="let res of prService.resourceSet;let index">
+
+                      <td>
+                          {{res.resource.name}}
+                      </td>
+                      <td>
+                          {{res.resource.code}}
+                      </td>
+                      <td>
+                          {{(index%2==0)?true:false}}
+                      </td>
+                      <td>
+                          {{res.resource.id}}
+                      </td>
+
+                  </tr>
+               
+
+              </tbody>
+          </table>
+
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       
         <!-- name Column -->
@@ -57,10 +101,14 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
+
   </div>
 </div>
 </div>
 </div>
+</div>
+
+
 </div>
 
 <button (click)="goToPage('template')" class="btn btn-primary btn-round">

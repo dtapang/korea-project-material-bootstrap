@@ -1,14 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Resource } from 'app/models/Resource';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map } from 'jquery';
+import { ResourceItem } from 'app/models/ResourceItem';
 
+
+export interface SelectedResources{
+  spResources : Resource [],
+  projectId: number
+}
 @Injectable({
   providedIn: 'root'
 })
 @Injectable()
 export class ProjectResourcesService {
+  private values: number [] = [];
+  private subject: Subject<number []> = new Subject<number []>();
+
+  resourceSet: Set<ResourceItem>;
 
   id: number;
   readonly url: string = "http://localhost:8080/korea";
@@ -23,6 +33,29 @@ export class ProjectResourcesService {
 
   resources: Resource[];
   constructor(private http: HttpClient) { }
+
+  sendMessage(prSet: Set<number>, projectId: number) {
+
+    prSet.forEach((pr)=>{
+      this.values.push(pr);
+    });
+    
+    this.subject.next(this.values);
+    
+  }
+
+  
+  
+  clearMessage() {
+    this.subject.next();
+  }
+
+  getMessage(): Observable<number []> {
+    return this.subject.asObservable();
+  }
+  getList(): number[]{
+    return this.values;
+  }
 
   getall(){
     return this._get(`${this.url}${this.ProjectResourcesItems}`);
