@@ -67,7 +67,8 @@
     
                                                     </div>
                                                     <div class="modal-footer justify-content-center">
-                                                        <button  class="btn btn-primary "  type="submit" [disabled]="!newResourceForm.valid">Save</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary" [disabled]="!newResourceForm.valid">Save</button>
                                                     </div>
 
                                                 </form>
@@ -104,9 +105,7 @@
                         <div class="table-responsive">
                             <table class="table"   >
                                 <thead class=" text-primary">
-                                    <th>
-                                        Select
-                                    </th>
+
                                     <th>
                                         Resource Name
                                     </th>
@@ -116,13 +115,7 @@
                                   </thead>
                                 <tbody>
                                     <tr *ngFor="let res of resources | searchFilter: searchText | paginate: { itemsPerPage: 5, currentPage: p }">
-                                        <td>
-                                            <input class="form-check-input" type="checkbox" value="">
-                                            
-                                        <span class="form-check-sign">
-                                            <span class="check"></span>
-                                        </span>
-                                        </td>  
+
                                         <td>
                                             {{res.name}}
                                         </td>
